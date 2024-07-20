@@ -1,0 +1,17 @@
+.new-item-container{
+    display:flex;
+    color: #bcbcc0;
+    margin-top:10px;
+}
+
+.add-symbol{
+    margin-bottom:4px;
+}
+
+.new-item{
+    background-color: transparent;
+    border:none;
+    outline:none;
+    color:#bcbcc0;
+    width: 175px;
+}

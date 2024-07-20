@@ -1,0 +1,32 @@
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1E1E1E;
+}
+
+.card {
+    background-color: #18181b;
+    border-radius: 8px;
+    width: 300px;
+    max-width: 100%;
+    border:3px solid #52525b;
+    color: #f4f4f5;
+    padding: 15px;
+}
+
+.card h2 {
+    margin: 0;
+    //padding: 0;
+}
+
+.card-content {
+    
+}
+
+.buttons{
+    display:flex;
+    padding-top:10px;
+    gap:10px;
+}
