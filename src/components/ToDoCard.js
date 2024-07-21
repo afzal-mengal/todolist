@@ -20,6 +20,9 @@ export default function ToDoCard() {
     }
 
     function handleAddTodo() {
+        if (inputValue === '') {
+            return;
+        }
         dispatch(addTodo(inputValue));
         setInputvalue('');
     }
@@ -31,7 +34,7 @@ export default function ToDoCard() {
                 {toDos.length > 0 && toDos.map((toDo) => <ToDoItem key={toDo.id} id={toDo.id}>{toDo.item}</ToDoItem>)}
                 <NewItem inputValue={inputValue} handleInputChange={handleInputChange}></NewItem>
                 <div className='buttons'>
-                    <CardButton onClick={handleAddTodo}>To-Do</CardButton>
+                    <CardButton onClick={handleAddTodo}>+ To-Do</CardButton>
                     <CardButton>Save</CardButton>
                 </div>
             </div>
