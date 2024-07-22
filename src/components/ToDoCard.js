@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo } from '../store/todoSlice';
 
@@ -15,6 +15,16 @@ export default function ToDoCard() {
 
     const [inputValue, setInputvalue] = useState('');
 
+    useEffect(() => {
+        try {
+            const serializedState = JSON.stringify(toDos);
+            localStorage.setItem('toDosState', serializedState);
+        }
+        catch (error) {
+            console.error("Local Storage Error", error);
+        }
+    }, [toDos]);
+
     function handleInputChange(event) {
         setInputvalue(event.target.value);
     }
@@ -27,12 +37,18 @@ export default function ToDoCard() {
         setInputvalue('');
     }
 
+    function handleInputEnter(event) {
+        if (event.key === 'Enter') {
+            handleAddTodo();
+        }
+    }
+
     return (<div className="parent">
         <div className="card">
             <h2>&#128640; Essential To-Do</h2>
             <div className='card-content'>
                 {toDos.length > 0 && toDos.map((toDo) => <ToDoItem key={toDo.id} id={toDo.id}>{toDo.item}</ToDoItem>)}
-                <NewItem inputValue={inputValue} handleInputChange={handleInputChange}></NewItem>
+                <NewItem inputValue={inputValue} handleInputEnter={handleInputEnter} handleInputChange={handleInputChange}></NewItem>
                 <div className='buttons'>
                     <CardButton onClick={handleAddTodo}>+ To-Do</CardButton>
                     <CardButton>Save</CardButton>
