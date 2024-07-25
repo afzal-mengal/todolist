@@ -1,12 +1,4 @@
-.parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1E1E1E;
-}
-
-.card {
+.todo-card {
     background-color: #18181b;
     border-radius: 8px;
     width: 300px;
@@ -16,16 +8,16 @@
     padding: 15px;
 }
 
-.card h2 {
+.todo-card h2 {
     margin: 0;
-    //padding: 0;
+    padding: 0;
 }
 
-.card-content {
+.todo-card-content {
     
 }
 
-.buttons{
+.todo-card-buttons{
     display:flex;
     padding-top:10px;
     gap:10px;

@@ -1,21 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from 'uuid';
+import { loadState } from "../util/util";
 
-function loadState() {
-    try {
-        const serializedState = localStorage.getItem('toDosState');
-        if (serializedState === null) {
-            return [];
-        }
-        return JSON.parse(serializedState);
-    }
-    catch (error) {
-        console.error("Local Storage Error", error);
-        return [];
-    }
-}
-
-const initialState = loadState();
+const initialState = loadState('toDosState');
 
 export const todoSlice = createSlice({
     name: 'todos',

@@ -1,12 +1,17 @@
 import { Provider } from 'react-redux';
 import store from './store/store.js';
-import './App.css';
 import ToDoCard from './components/ToDoCard';
+
+import './App.css';
+import DoneCard from './components/DoneCard.js';
 
 function App() {
   return (
     <Provider store={store}>
-      <ToDoCard></ToDoCard>
+      <div className='parent'>
+        <ToDoCard></ToDoCard>
+        <DoneCard></DoneCard>
+      </div>
     </Provider>
   );
 }

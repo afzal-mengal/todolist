@@ -11,19 +11,22 @@ import NewItem from './NewItem';
 export default function ToDoCard() {
 
     const toDos = useSelector((state) => state.toDos);
+    const doneToDos = useSelector((state) => state.doneToDos)
     const dispatch = useDispatch();
 
     const [inputValue, setInputvalue] = useState('');
 
     useEffect(() => {
         try {
-            const serializedState = JSON.stringify(toDos);
-            localStorage.setItem('toDosState', serializedState);
+            const serializedTodos = JSON.stringify(toDos);
+            localStorage.setItem('toDosState', serializedTodos);
+            const serializedDoneToDos = JSON.stringify(doneToDos);
+            localStorage.setItem('doneState', serializedDoneToDos);
         }
         catch (error) {
             console.error("Local Storage Error", error);
         }
-    }, [toDos]);
+    }, [toDos, doneToDos]);
 
     function handleInputChange(event) {
         setInputvalue(event.target.value);
@@ -43,17 +46,16 @@ export default function ToDoCard() {
         }
     }
 
-    return (<div className="parent">
-        <div className="card">
+    return (
+        <div className="todo-card">
             <h2>&#128640; Essential To-Do</h2>
-            <div className='card-content'>
+            <div className='todo-card-content'>
                 {toDos.length > 0 && toDos.map((toDo) => <ToDoItem key={toDo.id} id={toDo.id}>{toDo.item}</ToDoItem>)}
                 <NewItem inputValue={inputValue} handleInputEnter={handleInputEnter} handleInputChange={handleInputChange}></NewItem>
-                <div className='buttons'>
+                <div className='todo-card-buttons'>
                     <CardButton onClick={handleAddTodo}>+ To-Do</CardButton>
                     <CardButton>Save</CardButton>
                 </div>
             </div>
-        </div>
-    </div>);
+        </div>);
 }
