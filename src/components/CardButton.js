@@ -1,7 +1,7 @@
 import './CardButton.css'
 
-export default function CardButton({ onClick, children }) {
+export default function CardButton({ onClick, children, ...otherProps }) {
     return (<div className='button-container'>
-        <button onClick={onClick} className='card-button'>{children}</button>
+        <button onClick={onClick} className='card-button' {...otherProps}>{children}</button>
     </div>)
 }

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { removeDoneToDo } from '../store/doneSlice';
+import axios from "axios";
 
 import './DoneCard.css'
 
@@ -8,8 +9,17 @@ export default function DoneCard() {
     const doneToDos = useSelector(state => state.doneToDos)
     const dispatch = useDispatch()
 
-    function handleRemoveDoneTodo(id) {
-        dispatch(removeDoneToDo(id));
+    const handleRemoveDoneTodo = async (id) => {
+        try {
+            const response = await axios.post("http://localhost:4000/done/delete", {
+                toDoId: id
+            });
+            const deletedToDo = response.data.toDo;
+            dispatch(removeDoneToDo(id));
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     return (

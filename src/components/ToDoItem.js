@@ -1,18 +1,30 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeToDo } from '../store/todoSlice';
 import { addDoneTodo } from '../store/doneSlice';
+import axios from "axios";
 
 import './ToDoItem.css'
 
 export default function ToDoItem({ id, children }) {
-
-    const toDos = useSelector((state) => state.toDos);
     const dispatch = useDispatch();
 
-    function handleRemoveTodo() {
-        const index = toDos.findIndex(todo => todo.id === id);
-        dispatch(addDoneTodo(toDos[index]));
-        dispatch(removeToDo(id));
+    const handleRemoveTodo = async () => {
+        try {
+            let response = await axios.post("http://localhost:4000/todo/delete", {
+                toDoId: id
+            });
+            const deletedToDo = response.data.toDo;
+            dispatch(removeToDo(id));
+            response = await axios.post("http://localhost:4000/done/add", {
+                item: deletedToDo.item,
+                userId: deletedToDo.userId
+            });
+            const newDoneToDo = response.data.toDo
+            dispatch(addDoneTodo(newDoneToDo));
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     return (

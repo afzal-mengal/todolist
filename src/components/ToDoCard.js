@@ -1,43 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo } from '../store/todoSlice';
-
-import './ToDoCard.css';
-
+import axios from "axios";
 import ToDoItem from './ToDoItem';
 import CardButton from './CardButton';
 import NewItem from './NewItem';
 
-export default function ToDoCard() {
+import './ToDoCard.css';
+
+export default function ToDoCard({ userId }) {
 
     const toDos = useSelector((state) => state.toDos);
-    const doneToDos = useSelector((state) => state.doneToDos)
     const dispatch = useDispatch();
 
     const [inputValue, setInputvalue] = useState('');
-
-    useEffect(() => {
-        try {
-            const serializedTodos = JSON.stringify(toDos);
-            localStorage.setItem('toDosState', serializedTodos);
-            const serializedDoneToDos = JSON.stringify(doneToDos);
-            localStorage.setItem('doneState', serializedDoneToDos);
-        }
-        catch (error) {
-            console.error("Local Storage Error", error);
-        }
-    }, [toDos, doneToDos]);
 
     function handleInputChange(event) {
         setInputvalue(event.target.value);
     }
 
-    function handleAddTodo() {
+    const handleAddTodo = async () => {
         if (inputValue === '') {
             return;
         }
-        dispatch(addTodo(inputValue));
-        setInputvalue('');
+        try {
+            const response = await axios.post("http://localhost:4000/todo/add", {
+                item: inputValue,
+                userId: userId
+            });
+            const newToDo = response.data.toDo;
+            dispatch(addTodo(newToDo));
+        }
+        catch (error) {
+            console.log(error);
+        }
+        finally {
+            setInputvalue('');
+        }
     }
 
     function handleInputEnter(event) {

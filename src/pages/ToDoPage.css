@@ -1,0 +1,22 @@
+.todopage{
+    background-color: #1E1E1E;
+}
+
+#logout{
+    background-color: transparent;
+    color: #f4f4f5;
+    padding: 10px 20px;
+    border: 2px solid #f4f4f5;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#logout:hover {
+    background-color: #f4f4f5;
+    color: black;
+}

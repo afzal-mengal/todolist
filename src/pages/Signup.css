@@ -1,0 +1,38 @@
+.signup-card {
+    background-color: #18181b;
+    border-radius: 8px;
+    width: 300px;
+    max-width: 100%;
+    border:3px solid #52525b;
+    color: #f4f4f5;
+    padding: 15px;
+}
+
+.todo-card h2 {
+    margin: 0;
+    padding: 0;
+}
+
+label {
+    display:block;
+    font-size: 1.2rem;
+    padding-bottom:5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.link{
+    padding-top:10px;
+}
+
+.signup-card input{
+    border: none;
+    padding: 0.5rem;
+    border-bottom: 1px solid gray;
+    font-size: 1.1rem;
+    outline: none;
+    background-color: #18181b;
+    color:#f4f4f5;
+}
